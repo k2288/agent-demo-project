@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="login-page">
+    <form id="login-form" class="login-form" novalidate>
+      <h1>Log in</h1>
+
+      <div class="form-field">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" autocomplete="username" required />
+        <p id="username-error" class="field-error" role="alert"></p>
+      </div>
+
+      <div class="form-field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" autocomplete="current-password" required />
+        <p id="password-error" class="field-error" role="alert"></p>
+      </div>
+
+      <button type="submit">Log in</button>
+
+      <p id="form-status" class="form-status" role="status"></p>
+    </form>
+  </main>
+
+  <script src="src/validation.js"></script>
+  <script src="src/login.js"></script>
+</body>
+</html>
