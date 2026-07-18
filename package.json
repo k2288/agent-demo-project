@@ -1,0 +1,9 @@
+{
+  "name": "login-page",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Login page with username/password validation",
+  "scripts": {
+    "test": "node --test test/**/*.test.js"
+  }
+}
