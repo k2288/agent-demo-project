@@ -1,0 +1,10 @@
+{
+  "name": "login-page",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Login page with username/password validation",
+  "scripts": {
+    "test": "node --test"
+  }
+}
