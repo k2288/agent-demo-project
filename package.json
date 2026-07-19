@@ -1,0 +1,16 @@
+{
+  "name": "login-page",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Login page with username/password validation",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom"
+  }
+}
