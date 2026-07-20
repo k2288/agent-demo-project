@@ -85,6 +85,16 @@ button[type="submit"]:hover {
   text-align: center;
 }
 
+.form-footer {
+  margin: 16px 0 0;
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.form-footer a {
+  color: #2563eb;
+}
+
 .dashboard-page {
   min-height: 100vh;
   display: flex;

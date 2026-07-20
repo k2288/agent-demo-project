@@ -1,7 +1,9 @@
 const {
   validateUsername,
   validatePassword,
-  validateLoginForm
+  validateConfirmPassword,
+  validateLoginForm,
+  validateRegisterForm
 } = require('../src/validation');
 
 describe('validateUsername', () => {
@@ -67,6 +69,56 @@ describe('validateLoginForm', () => {
 
   test('handles missing fields object', () => {
     const result = validateLoginForm();
+    expect(result.valid).toBe(false);
+  });
+});
+
+describe('validateConfirmPassword', () => {
+  test('rejects empty confirmation', () => {
+    expect(validateConfirmPassword('abcd1234', '')).toMatch(/confirm/i);
+    expect(validateConfirmPassword('abcd1234', undefined)).toMatch(/confirm/i);
+  });
+
+  test('rejects a confirmation that does not match the password', () => {
+    expect(validateConfirmPassword('abcd1234', 'abcd9999')).toMatch(/do not match/i);
+  });
+
+  test('accepts a matching confirmation', () => {
+    expect(validateConfirmPassword('abcd1234', 'abcd1234')).toBeNull();
+  });
+});
+
+describe('validateRegisterForm', () => {
+  test('returns invalid with all field errors when fields are empty', () => {
+    const result = validateRegisterForm({ username: '', password: '', confirmPassword: '' });
+    expect(result.valid).toBe(false);
+    expect(result.errors.username).toBeTruthy();
+    expect(result.errors.password).toBeTruthy();
+    expect(result.errors.confirmPassword).toBeTruthy();
+  });
+
+  test('returns invalid when confirmation does not match', () => {
+    const result = validateRegisterForm({
+      username: 'john_doe',
+      password: 'abcd1234',
+      confirmPassword: 'abcd9999'
+    });
+    expect(result.valid).toBe(false);
+    expect(result.errors.confirmPassword).toMatch(/do not match/i);
+  });
+
+  test('returns valid with no errors for correct input', () => {
+    const result = validateRegisterForm({
+      username: 'john_doe',
+      password: 'abcd1234',
+      confirmPassword: 'abcd1234'
+    });
+    expect(result.valid).toBe(true);
+    expect(result.errors).toEqual({});
+  });
+
+  test('handles missing fields object', () => {
+    const result = validateRegisterForm();
     expect(result.valid).toBe(false);
   });
 });

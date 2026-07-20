@@ -59,11 +59,50 @@ function validateLoginForm(fields) {
   };
 }
 
+function validateConfirmPassword(password, confirmPassword) {
+  var value = typeof confirmPassword === 'string' ? confirmPassword : '';
+
+  if (!value) {
+    return 'Please confirm your password.';
+  }
+  if (value !== password) {
+    return 'Passwords do not match.';
+  }
+  return null;
+}
+
+function validateRegisterForm(fields) {
+  fields = fields || {};
+  var errors = {};
+
+  var usernameError = validateUsername(fields.username);
+  if (usernameError) {
+    errors.username = usernameError;
+  }
+
+  var passwordError = validatePassword(fields.password);
+  if (passwordError) {
+    errors.password = passwordError;
+  }
+
+  var confirmPasswordError = validateConfirmPassword(fields.password, fields.confirmPassword);
+  if (confirmPasswordError) {
+    errors.confirmPassword = confirmPasswordError;
+  }
+
+  return {
+    valid: Object.keys(errors).length === 0,
+    errors: errors
+  };
+}
+
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     validateUsername: validateUsername,
     validatePassword: validatePassword,
+    validateConfirmPassword: validateConfirmPassword,
     validateLoginForm: validateLoginForm,
+    validateRegisterForm: validateRegisterForm,
     USERNAME_MIN_LENGTH: USERNAME_MIN_LENGTH,
     USERNAME_MAX_LENGTH: USERNAME_MAX_LENGTH,
     PASSWORD_MIN_LENGTH: PASSWORD_MIN_LENGTH
